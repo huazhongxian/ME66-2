@@ -249,9 +249,9 @@ namespace ME66 {
    * @param tx Tx pin; eg: SerialPin.P13
    * @param rx Rx pin; eg: SerialPin.P14
    */
-  //% blockId=newland_init block="Newland init|Tx pin %tx|Rx pin %rx"
+  //% blockId=ME66_init block="Newland init|Tx pin %tx|Rx pin %rx"
   //% group="Basic" weight=100
-  export function newland_init(tx: SerialPin, rx: SerialPin): void {
+  export function ME66_init(tx: SerialPin, rx: SerialPin): void {
     serial.redirect(tx, rx, BaudRate.BaudRate115200)
     basic.pause(500)
     serial.setTxBufferSize(128)
@@ -263,24 +263,24 @@ namespace ME66 {
     basic.pause(300)
   }
 
-  //% blockId=newland_init_pw block="Newland init powerbrick|Port %port"
+  //% blockId=ME66_init_pw block="Newland init powerbrick|Port %port"
   //% group="Basic" weight=99
-  export function newland_init_pw(port: SerialPorts): void {
-    newland_init(PortSerial[port][0], PortSerial[port][1])
+  export function ME66_init_pw(port: SerialPorts): void {
+    ME66_init(PortSerial[port][0], PortSerial[port][1])
   }
 
-  //% blockId=newland_lcd_direction block="Newland LCD Dir%dir"
+  //% blockId=ME66_lcd_direction block="Newland LCD Dir%dir"
   //% group="Basic" weight=98
-  export function newland_lcd_direction(dir: LcdDirection): void {
+  export function ME66_lcd_direction(dir: LcdDirection): void {
     let str = `K6 ${dir}`
     serial.writeLine(str)
     basic.pause(100)
   }
 
 
-  //% blockId=newland_screen_direction block="Newland screen Dir%dir"
+  //% blockId=ME66_screen_direction block="Newland screen Dir%dir"
   //% group="Basic" weight=98
-  export function newland_screen_direction(dir: screenDirection): void {
+  export function ME66_screen_direction(dir: screenDirection): void {
     serial.readString()
     let str = `K7 ${dir}`
     serial.writeLine(str)
@@ -288,18 +288,18 @@ namespace ME66 {
   }
 
 
-  //% blockId=newland_camera_switch block="Newland camera Dir%dir"
+  //% blockId=ME66_camera_switch block="Newland camera Dir%dir"
   //% group="Basic" weight=98
-  export function newland_camera_switch(dir: cameraDirection): void {
+  export function ME66_camera_switch(dir: cameraDirection): void {
     serial.readString()
     let str = `K8 ${dir}`
     serial.writeLine(str)
     basic.pause(1000)
   }
 
-  //% blockId=newland_clear_display block="Newland newland_clear_display"
+  //% blockId=ME66_clear_display block="Newland ME66_clear_display"
   //% group="Basic" weight=88
-  export function newland_clear_display(): void {
+  export function ME66_clear_display(): void {
     serial.readString()
     let str = `K9`
     serial.writeLine(str)
@@ -311,9 +311,9 @@ namespace ME66 {
   /**
    * @param name savepath; eg: name.wav
    */
-  //% blockId=newland_screenshot1 block="Newland Screenshot %name"
+  //% blockId=ME66_screenshot1 block="Newland Screenshot %name"
   //% group="Basic" weight=95
-  export function newland_screenshot1(name: string): void {
+  export function ME66_screenshot1(name: string): void {
     let str = `K71 ${name}`
     serial.writeLine(str)
   }
@@ -321,9 +321,9 @@ namespace ME66 {
   /**
    * @param name jpeg to display; eg: name.wav
    */
-  //% blockId=newland_display1 block="Newland Display %name"
+  //% blockId=ME66_display1 block="Newland Display %name"
   //% group="Basic" weight=94 blockGap=40
-  export function newland_display1(name: string): void {
+  export function ME66_display1(name: string): void {
     let str = `K72 ${name}`
     serial.writeLine(str)
   }
@@ -337,20 +337,20 @@ namespace ME66 {
    * @param t string to display; eg: hello
    * @param d delay; eg: 1000
    */
-  //% blockId=newland_print block="Newland print %t X %x Y %y||delay %d ms"
+  //% blockId=ME66_print block="Newland print %t X %x Y %y||delay %d ms"
   //% x.min=0 x.max=320
   //% y.min=0 y.max=240
   //% group="Basic" weight=97
-  export function newland_print(t: string, x: number, y: number, d: number = 1000): void {
+  export function ME66_print(t: string, x: number, y: number, d: number = 1000): void {
 
     let str = `K4 ${x} ${y} ${d} ${t}`
     serial.writeLine(str)
   }
 
-  //% blockId=newland_onbtn block="on Button"
+  //% blockId=ME66_onbtn block="on Button"
   //% weight=96
   //% group="Basic" draggableParameters=reporter
-  export function newland_onbtn(
+  export function ME66_onbtn(
       handler: (btnA: number, btnB: number, btnEnter: number) => void
   ): void {
     btnEvt = handler
@@ -359,9 +359,9 @@ namespace ME66 {
   /**
    * @param name savepath; eg: name.jpg
    */
-  //% blockId=newland_screenshot block="Newland Screenshot %name"
+  //% blockId=ME66_screenshot block="Newland Screenshot %name"
   //% group="Basic" weight=95
-  export function newland_screenshot(name: string): void {
+  export function ME66_screenshot(name: string): void {
     let str = `K2 ${name}`
     serial.writeLine(str)
   }
@@ -369,16 +369,16 @@ namespace ME66 {
   /**
    * @param name jpeg to display; eg: name.jpg
    */
-  //% blockId=newland_display block="Newland Display %name"
+  //% blockId=ME66_display block="Newland Display %name"
   //% group="Basic" weight=94 blockGap=40
-  export function newland_display(name: string): void {
+  export function ME66_display(name: string): void {
     let str = `K1 ${name}`
     serial.writeLine(str)
   }
 
-  /*//% blockId=newland_reset_cls block="Newland Reset Classifier"
+  /*//% blockId=ME66_reset_cls block="Newland Reset Classifier"
   //% group="Classifier" weight=90
-  export function newland_reset_cls(): void {
+  export function ME66_reset_cls(): void {
     let str = `K40`
     serial.writeLine(str)
   }*/
@@ -386,33 +386,33 @@ namespace ME66 {
   /**
    * @param tag tag index; eg: cat
    */
-  /*//% blockId=newland_addtag block="Newland Add Tag %tag"
+  /*//% blockId=ME66_addtag block="Newland Add Tag %tag"
   //% group="Classifier" weight=89
-  export function newland_addtag(tag: string): void {
+  export function ME66_addtag(tag: string): void {
     let str = `K41 ${tag}`
     serial.writeLine(str)
   }*/
 
-  //% blockId=newland_run block="Newland Run Classifer"
+  //% blockId=ME66_run block="Newland Run Classifer"
   //% group="Classifier" weight=88
-  export function newland_run(): void {
+  export function ME66_run(): void {
     let str = `K42`
     serial.writeLine(str)
     // asyncWrite(str, 42)
   }
 
-  //% blockId=newland_classified block="on Identified"
+  //% blockId=ME66_classified block="on Identified"
   //% group="Classifier" weight=87 draggableParameters=reporter
-  export function newland_classified(handler: (classId: string) => void) {
+  export function ME66_classified(handler: (classId: string) => void) {
     classifierEvt = handler
   }
 
   /**
    * @param path json to save; eg: class.json
    */
-  /*//% blockId=newland_cls_save block="Newland Save Classifier %path"
+  /*//% blockId=ME66_cls_save block="Newland Save Classifier %path"
   //% group="Classifier" weight=86
-  export function newland_cls_save(path: string): void {
+  export function ME66_cls_save(path: string): void {
     let str = `K43 ${path}`
     serial.writeLine(str)
   }*/
@@ -420,9 +420,9 @@ namespace ME66 {
   /**
    * @param path json to save; eg: class.json
    */
-  /*//% blockId=newland_cls_load block="Newland Load Classifier %path"
+  /*//% blockId=ME66_cls_load block="Newland Load Classifier %path"
   //% group="Classifier" weight=85
-  export function newland_cls_load(path: string): void {
+  export function ME66_cls_load(path: string): void {
     let str = `K44 ${path}`
     serial.writeLine(str)
   }*/
@@ -431,18 +431,18 @@ namespace ME66 {
   /**
    * @param th threshold; eg: 2000
    */
-  //% blockId=newland_track_circle block="Newland track circle threshold%th"
+  //% blockId=ME66_track_circle block="Newland track circle threshold%th"
   //% group="Graphic" weight=80
   //% th.min=1000 th.max=5000
-  export function newland_track_circle(th: number): void {
+  export function ME66_track_circle(th: number): void {
     let str = `K10 ${th}`
     serial.writeLine(str)
 
   }
 
-  //% blockId=newland_oncircletrack block="on Find Circle"
+  //% blockId=ME66_oncircletrack block="on Find Circle"
   //% group="Graphic" weight=79 draggableParameters=reporter blockGap=40
-  export function newland_oncircletrack(
+  export function ME66_oncircletrack(
       handler: (x: number, y: number, r: number) => void
   ) {
     circleEvt = handler
@@ -451,16 +451,16 @@ namespace ME66 {
   /**
    * @param th threshold; eg: 6000
    */
-  /*//% blockId=newland_track_rect block="Newland track rectangle %th"
+  /*//% blockId=ME66_track_rect block="Newland track rectangle %th"
    //% group="Graphic" weight=78
-   export function newland_track_rect(th: number): void {
+   export function ME66_track_rect(th: number): void {
      let str = `K11 ${th}`
      serial.writeLine(str)
    }
 
-   //% blockId=newland_onrecttrack block="on Find Rectangle"
+   //% blockId=ME66_onrecttrack block="on Find Rectangle"
    //% group="Graphic" weight=77 draggableParameters=reporter blockGap=40
-   export function newland_onrecttrack(
+   export function ME66_onrecttrack(
        handler: (x: number, y: number, w: number, h: number) => void
    ) {
      rectEvt = handler
@@ -469,9 +469,9 @@ namespace ME66 {
   /**
    * @param key color key; eg: red
    */
-  //% blockId=newland_colorcali block="Newland color calibration %key"
+  //% blockId=ME66_colorcali block="Newland color calibration %key"
   //% group="Graphic" weight=76
-  export function newland_colorcali(key: string) {
+  export function ME66_colorcali(key: string) {
     let str = `K16 ${key}`
     serial.writeLine(str)
   }
@@ -479,16 +479,16 @@ namespace ME66 {
   /**
    * @param th threshold; eg: 2000
    */
-  //% blockId=newland_track_line block="Newland track line %th"
+  //% blockId=ME66_track_line block="Newland track line %th"
   //% group="Graphic" weight=75
-  export function newland_track_line(th: string): void {
+  export function ME66_track_line(th: string): void {
     let str = `K12 ${th}`
     serial.writeLine(str)
   }
 
-  //% blockId=newland_onlinetrack block="on Line Update"
+  //% blockId=ME66_onlinetrack block="on Line Update"
   //% group="Graphic" weight=74 draggableParameters=reporter
-  export function newland_onlinetrack(
+  export function ME66_onlinetrack(
       handler: (x1: number, y1: number, x2: number, y2: number) => void
   ) {
     lineEvt = handler
@@ -498,57 +498,57 @@ namespace ME66 {
    * @param key color key; eg: red
    * 0-red,1-green,2-blue
    */
-  //% blockId=newland_track_colorblob block="Newland track color blob %key"
+  //% blockId=ME66_track_colorblob block="Newland track color blob %key"
   //% group="Graphic" weight=73
-  export function newland_track_colorblob(key: string): void {
+  export function ME66_track_colorblob(key: string): void {
     let str = `K15 ${key}`
     serial.writeLine(str)
   }
 
-  //% blockId=newland_oncolorblob block="on Color blob"
+  //% blockId=ME66_oncolorblob block="on Color blob"
   //% group="Graphic" weight=72 draggableParameters=reporter blockGap=40
-  export function newland_oncolorblob(
+  export function ME66_oncolorblob(
       handler: (x: number, y: number, w: number, h: number) => void
   ) {
     colorblobEvt = handler
   }
 
-  //% blockId=newland_qrcode block="Newland QR code"
+  //% blockId=ME66_qrcode block="Newland QR code"
   //% group="Tag/Code" weight=70
-  export function newland_qrcode() {
+  export function ME66_qrcode() {
     let str = `K20`
     serial.writeLine(str)
   }
 
-  //% blockId=newland_onqrcode block="on QR code"
+  //% blockId=ME66_onqrcode block="on QR code"
   //% group="Tag/Code" weight=69 draggableParameters=reporter blockGap=40
-  export function newland_onqrcode(handler: (link: string) => void) {
+  export function ME66_onqrcode(handler: (link: string) => void) {
     qrcodeEvt = handler
   }
 
-  //% blockId=newland_barcode block="Newland BAR code"
+  //% blockId=ME66_barcode block="Newland BAR code"
   //% group="Tag/Code" weight=68
-  export function newland_barcode() {
+  export function ME66_barcode() {
     let str = `K22`
     serial.writeLine(str)
   }
 
-  //% blockId=newland_onbarcode block="on Barcode code"
+  //% blockId=ME66_onbarcode block="on Barcode code"
   //% group="Tag/Code" weight=67 draggableParameters=reporter blockGap=40
-  export function newland_onbarcode(handler: (code: string) => void) {
+  export function ME66_onbarcode(handler: (code: string) => void) {
     barcodeEvt = handler
   }
 
-  /* //% blockId=newland_apriltag block="Newland April Tag"
+  /* //% blockId=ME66_apriltag block="Newland April Tag"
  //% group="Tag/Code" weight=66
- export function newland_apriltag() {
+ export function ME66_apriltag() {
    let str = `K23`
    serial.writeLine(str)
  }
 
- //% blockId=newland_onapriltag block="on AprilTag"
+ //% blockId=ME66_onapriltag block="on AprilTag"
  //% group="Tag/Code" weight=65 draggableParameters=reporter blockGap=40
- export function newland_onapriltag(
+ export function ME66_onapriltag(
      handler: (
          id: string,
          x: number,
@@ -563,16 +563,16 @@ namespace ME66 {
    apriltagEvt = handler
  }*/
 
-  //% blockId=newland_loadyoloface block="Newland Load Face yolo"
+  //% blockId=ME66_loadyoloface block="Newland Load Face yolo"
   //% group="AI" weight=60
-  export function newland_loadyoloface() {
+  export function ME66_loadyoloface() {
     let str = `K30`
     serial.writeLine(str)
   }
 
-  //% blockId=newland_facedetect block="Newland face detect"
+  //% blockId=ME66_facedetect block="Newland face detect"
   //% group="AI" weight=59
-  export function newland_facedetect() {
+  export function ME66_facedetect() {
     let str = `K31`
     // serial.writeLine(str)
     // basic.pause(200)
@@ -584,24 +584,24 @@ namespace ME66 {
 
 
   //改为人脸数量
-  //% blockId=newland_facecount block="Newland face number"
+  //% blockId=ME66_facecount block="Newland face number"
   //% group="AI" weight=57 draggableParameters=reporter blockGap=40
-  export function newland_facecount(handler: (x: number) => void) {
+  export function ME66_facecount(handler: (x: number) => void) {
     // let str = `K32`
     // asyncWrite(`K32`, 32)
     // return faceNum
     facenumEvt = handler
   }
 
-  //% blockId=newland_onfindface block="on Find Face"
+  //% blockId=ME66_onfindface block="on Find Face"
   //% group="AI" weight=58 draggableParameters=reporter blockGap=40
-  export function newland_onfindface(handler: (x: number, y: number) => void) {
+  export function ME66_onfindface(handler: (x: number, y: number) => void) {
     facedetEvt = handler
   }
 
-  //% blockId=newland_loadobjectdetection block="Newland Load Object detectio"
+  //% blockId=ME66_loadobjectdetection block="Newland Load Object detectio"
   //% group="AI" weight=53
-  export function newland_loadobjectdetection() {
+  export function ME66_loadobjectdetection() {
     let str = `K50`
     serial.writeLine(str)
   }
@@ -609,9 +609,9 @@ namespace ME66 {
   /**
    * @param th threshold; eg: 0.5
    */
-  //% blockId=newland_detection block="Newland object detectio %th"
+  //% blockId=ME66_detection block="Newland object detectio %th"
   //% group="AI" weight=52
-  export function newland_detection(th: number): void {
+  export function ME66_detection(th: number): void {
     let str = `K51 ${th}`
     // serial.writeLine(str)
     // basic.pause(200)
@@ -619,16 +619,16 @@ namespace ME66 {
   }
 
 
-  //% blockId=newland_detectionname block="on detectio Name"
+  //% blockId=ME66_detectionname block="on detectio Name"
   //% group="AI" weight=51 draggableParameters=reporter blockGap=40
-  export function newland_detectionname(handler: (txt: string, x: number, y: number) => void) {
+  export function ME66_detectionname(handler: (txt: string, x: number, y: number) => void) {
     objectdetEvt = handler
   }
 
 
-  //% blockId=newland_loaddigitalrecognition block="Newland  load digital recognition detectio"
+  //% blockId=ME66_loaddigitalrecognition block="Newland  load digital recognition detectio"
   //% group="AI" weight=63
-  export function newland_loaddigitalrecognition() {
+  export function ME66_loaddigitalrecognition() {
     let str = `K60`
     serial.writeLine(str)
   }
@@ -636,18 +636,18 @@ namespace ME66 {
   /**
    * @param th threshold; eg: 0.5
    */
-  //% blockId=newland_digitalrecognition block="Newland digital recognition %th"
+  //% blockId=ME66_digitalrecognition block="Newland digital recognition %th"
   //% group="AI" weight=62
-  export function newland_digitalrecognition(th: number) {
+  export function ME66_digitalrecognition(th: number) {
     let str = `K61 ${th}`
     // serial.writeLine(str)
     // basic.pause(200)
     asyncWrite(str, 61)
   }
 
-  //% blockId=newland_digitalid block="newland digitalid Value"
+  //% blockId=ME66_digitalid block="newland digitalid Value"
   //% group="AI" weight=61 draggableParameters=reporter blockGap=40
-  export function newland_digitalid(handler: (x: number) => void) {
+  export function ME66_digitalid(handler: (x: number) => void) {
     carddetEvt = handler
   }
 
@@ -655,31 +655,31 @@ namespace ME66 {
    * @param ssid SSID; eg: ssid
    * @param pass PASSWORD; eg: password
    */
-  /*  //% blockId=newland_join_ap block="Join Ap %ssid %pass"
+  /*  //% blockId=ME66_join_ap block="Join Ap %ssid %pass"
     //% group="Wifi" weight=50
-    export function newland_join_ap(ssid: string, pass: string) {
+    export function ME66_join_ap(ssid: string, pass: string) {
       serial.writeLine(`K50 ${ssid} ${pass}`)
     }*/
 
-  /*  //% blockId=newland_getip block="Wifi Get IP"
+  /*  //% blockId=ME66_getip block="Wifi Get IP"
     //% group="Wifi" weight=49
-    export function newland_get_ip() {
+    export function ME66_get_ip() {
       // serial.writeLine(`K54`)
       let str = `K54`
       asyncWrite(str, 54)
     }*/
 
-  /*  //% blockId=newland_ip_onread block="on IP Data"
+  /*  //% blockId=ME66_ip_onread block="on IP Data"
     //% group="Wifi" weight=48 draggableParameters=reporter
-    export function newland_ip_onread(
+    export function ME66_ip_onread(
       handler: (ip: string) => void
     ) {
       ipEvt = handler
     }*/
 
-  /*  //% blockId=newland_gettime block="Newland get time"
+  /*  //% blockId=ME66_gettime block="Newland get time"
     //% group="Wifi" weight=47
-    export function newland_gettime(): Array<string> {
+    export function ME66_gettime(): Array<string> {
       asyncWrite(`K56`, 56)
       return lastCmd
     }*/
@@ -691,9 +691,9 @@ namespace ME66 {
    * @param user Username; eg: user
    * @param pass Password; eg: pass
    */
-  /*  //% blockId=newland_mqtt_host block="Mqtt Host %host| clientID%cid||Port%port User%user Pass%pass"
+  /*  //% blockId=ME66_mqtt_host block="Mqtt Host %host| clientID%cid||Port%port User%user Pass%pass"
     //% group="Wifi" weight=46
-    export function newland_mqtt_host(
+    export function ME66_mqtt_host(
       host: string,
       cid: string,
       port: number = 1883,
@@ -711,9 +711,9 @@ namespace ME66 {
    * @param topic Topic to subscribe; eg: /topic
    */
   /*
-    //% blockId=newland_mqtt_sub block="Mqtt Subscribe %topic"
+    //% blockId=ME66_mqtt_sub block="Mqtt Subscribe %topic"
     //% group="Wifi" weight=45
-    export function newland_mqtt_sub(topic: string) {
+    export function ME66_mqtt_sub(topic: string) {
       serial.writeLine(`K52 ${topic}`)
     }
   */
@@ -723,9 +723,9 @@ namespace ME66 {
    * @param data Data to publish; eg: hello
    */
   /*
-    //% blockId=newland_mqtt_pub block="Mqtt Publish %topic %data"
+    //% blockId=ME66_mqtt_pub block="Mqtt Publish %topic %data"
     //% group="Wifi" weight=44
-    export function newland_mqtt_pub(topic: string, data: string) {
+    export function ME66_mqtt_pub(topic: string, data: string) {
       serial.writeLine(`K53 ${topic} ${data}`)
     }
   */
@@ -733,9 +733,9 @@ namespace ME66 {
   /**
    * @param topic Mqtt Read; eg: /topic
    */
-  /*  //% blockId=newland_mqtt_read block="Mqtt Read %topic"
+  /*  //% blockId=ME66_mqtt_read block="Mqtt Read %topic"
     //% group="Wifi" weight=43
-    export function newland_mqtt_read(topic: string) {
+    export function ME66_mqtt_read(topic: string) {
       topic = topic || ''
       let str = `K55 ${topic}`
       serial.writeLine(str)
@@ -743,9 +743,9 @@ namespace ME66 {
 
     }*/
 
-  /*  //% blockId=newland_mqtt_onread block="on Mqtt Data"
+  /*  //% blockId=ME66_mqtt_onread block="on Mqtt Data"
     //% group="Wifi" weight=42 draggableParameters=reporter
-    export function newland_mqtt_onread(
+    export function ME66_mqtt_onread(
       handler: (data: string, topic: string) => void
     ) {
       mqttDataEvt = handler
@@ -755,47 +755,47 @@ namespace ME66 {
   /**
    * @param file Wav File to record; eg: say.wav
    */
-  /*//% blockId=newland_audio_rec block="WAV Rec %file"
+  /*//% blockId=ME66_audio_rec block="WAV Rec %file"
   //% group="Audio" weight=40
-  export function newland_audio_rec(file: string) {
+  export function ME66_audio_rec(file: string) {
     serial.writeLine(`K61 ${file}`)
   }*/
 
   /**
    * @param file Wav File to play; eg: say.wav
    */
-  /*//% blockId=newland_audio_play block="WAV Play %file"
+  /*//% blockId=ME66_audio_play block="WAV Play %file"
   //% group="Audio" weight=39
-  export function newland_audio_play(file: string) {
+  export function ME66_audio_play(file: string) {
     serial.writeLine(`K62 ${file}`)
   }*/
 
-  /*//% blockId=newland_audio_noisetap block="Calibrate noise"
+  /*//% blockId=ME66_audio_noisetap block="Calibrate noise"
   //% group="Audio" weight=38
-  export function newland_audio_noisetap(): void {
+  export function ME66_audio_noisetap(): void {
     serial.writeLine(`K63`)
   }*/
 
   /**
    * @param classid Speech Cmd add; eg: cmd
    */
-  /*//% blockId=newland_speechcmd_addmodel block="Speech Cmd add %classid"
+  /*//% blockId=ME66_speechcmd_addmodel block="Speech Cmd add %classid"
   //% group="Audio" weight=37
-  export function newland_speechcmd_addmodel(classid: string) {
+  export function ME66_speechcmd_addmodel(classid: string) {
     serial.writeLine(`K64 ${classid}`)
   }*/
 
-  /*//% blockId=newland_speechcmd_listen block="Speech Cmd Listen"
+  /*//% blockId=ME66_speechcmd_listen block="Speech Cmd Listen"
   //% group="Audio" weight=36
-  export function newland_speechcmd_listen(): void {
+  export function ME66_speechcmd_listen(): void {
     let str = `K65`
     serial.writeLine('K65')
     // asyncWrite(str, 65)
   }*/
 
-  /*//% blockId=newland_speechcmd_onrecognize block="on Speech Cmd"
+  /*//% blockId=ME66_speechcmd_onrecognize block="on Speech Cmd"
   //% group="Audio" weight=35 draggableParameters=reporter
-  export function newland_speechcmd_onrecognize(
+  export function ME66_speechcmd_onrecognize(
     handler: (classId: string) => void
   ) {
     speechCmdEvt = handler
@@ -804,9 +804,9 @@ namespace ME66 {
   /**
    * @param path json to save; eg: cmd.json
    */
-  /*//% blockId=newland_speechcmd_save block="Newland Save speech cmd %path"
+  /*//% blockId=ME66_speechcmd_save block="Newland Save speech cmd %path"
   //% group="Audio" weight=34
-  export function newland_speechcmd_save(path: string): void {
+  export function ME66_speechcmd_save(path: string): void {
     let str = `K66 ${path}`
     serial.writeLine(str)
   }*/
@@ -814,32 +814,32 @@ namespace ME66 {
   /**
    * @param path json to save; eg: cmd.json
    */
-  /*//% blockId=newland_speechcmd_load block="Newland Load speech cmd %path"
+  /*//% blockId=ME66_speechcmd_load block="Newland Load speech cmd %path"
   //% group="Audio" weight=33 blockGap=40
-  export function newland_speechcmd_load(path: string): void {
+  export function ME66_speechcmd_load(path: string): void {
     let str = `K67 ${path}`
     serial.writeLine(str)
   }*/
 
-  /*//% blockId=newland_cloud_facerecognize block="Newland Cloud Face Recognize"
+  /*//% blockId=ME66_cloud_facerecognize block="Newland Cloud Face Recognize"
   //% group="CloudAI" weight=30
-  export function newland_cloud_facerecognize() {
+  export function ME66_cloud_facerecognize() {
     let str = `K75`
     serial.writeLine(`K75`)
     // asyncWrite(str, 75)
   }*/
 
-  /*//% blockId=newland_cloud_onregface block="on Recognize Face"
+  /*//% blockId=ME66_cloud_onregface block="on Recognize Face"
   //% group="CloudAI" weight=29 draggableParameters=reporter
-  export function newland_cloud_onregface(
+  export function ME66_cloud_onregface(
     handler: (token: string, sex: string, age: number, mask: number, expression: string) => void
   ) {
     facetokenEvt = handler
   }*/
 
-  /*//% blockId=newland_cloud_faceaddgroup block="add face token %TOKEN to Group %GROUP with name %NAME"
+  /*//% blockId=ME66_cloud_faceaddgroup block="add face token %TOKEN to Group %GROUP with name %NAME"
   //% group="CloudAI" weight=28
-  export function newland_cloud_faceaddgroup(
+  export function ME66_cloud_faceaddgroup(
     TOKEN: string,
     GROUP: string,
     NAME: string
@@ -847,17 +847,17 @@ namespace ME66 {
     serial.writeLine(`K76 ${TOKEN} ${GROUP} ${NAME}`)
   }*/
 
-  /*//% blockId=newland_cloud_facesearch block="search face token %TOKEN in group %GROUP"
+  /*//% blockId=ME66_cloud_facesearch block="search face token %TOKEN in group %GROUP"
   //% group="CloudAI" weight=27
-  export function newland_cloud_facesearch(TOKEN: string, GROUP: string) {
+  export function ME66_cloud_facesearch(TOKEN: string, GROUP: string) {
     let str =`K77 ${TOKEN} ${GROUP}`
     serial.writeLine(str)
     // asyncWrite(str, 77)
   }*/
 
-  /* //% blockId=newland_cloud_onfindface block="on Find Face"
+  /* //% blockId=ME66_cloud_onfindface block="on Find Face"
    //% group="CloudAI" weight=26 draggableParameters=reporter blockGap=40
-   export function newland_cloud_onfindface(
+   export function ME66_cloud_onfindface(
      handler: (name: string, confidence: number) => void
    ) {
      facefoundEvt = handler
@@ -866,25 +866,25 @@ namespace ME66 {
   /**
    * @param TXT text to speech; eg: hello world
    */
-  /*//% blockId=newland_cloud_tts block="TTS %TXT"
+  /*//% blockId=ME66_cloud_tts block="TTS %TXT"
   //% group="CloudAI" weight=25
-  export function newland_cloud_tts(TXT: string) {
+  export function ME66_cloud_tts(TXT: string) {
     let str = TXT.split(' ').join('.')
     serial.writeLine(`K78 ${str}`)
   }*/
 
 
-  /*//% blockId=newland_reset block="Newland reset"
+  /*//% blockId=ME66_reset block="Newland reset"
   //% group="Basic" weight=10
   //% advanced=true
-  export function newland_reset(): void {
+  export function ME66_reset(): void {
     serial.writeLine(`K99`)
   }*/
 
-  /*//% blockId=newland_stop_kpu block="Newland Stop kpu"
+  /*//% blockId=ME66_stop_kpu block="Newland Stop kpu"
   //% group="Basic" weight=9 blockGap=40
   //% advanced=true
-  export function newland_stop_kpu(): void {
+  export function ME66_stop_kpu(): void {
     let str = `K98`
     serial.writeLine(str)
   }*/
@@ -892,12 +892,12 @@ namespace ME66 {
   /**
    * @param txt string to display; eg: 你好世界
    */
-  //% blockId=newland_print_unicode block="Print UNICODE X %x Y %y %txt||delay %delay ms"
+  //% blockId=ME66_print_unicode block="Print UNICODE X %x Y %y %txt||delay %delay ms"
   //% x.min=0 x.max=320
   //% y.min=0 y.max=240
   //% group="Basic" weight=100
   //% advanced=true
-  export function newland_print_unicode(
+  export function ME66_print_unicode(
       x: number,
       y: number,
       txt: string,
@@ -917,27 +917,27 @@ namespace ME66 {
   /**
    * @param path kmodel to load; eg: model.kmodel
    */
-  /*//% blockId=newland_loadkmodel block="Load KNN model %path"
+  /*//% blockId=ME66_loadkmodel block="Load KNN model %path"
   //% group="Classifier" weight=90
   //% advanced=true
-  export function newland_loadkmodel(path: string) {
+  export function ME66_loadkmodel(path: string) {
     let str = `K45 ${path}`
     serial.writeLine(str)
   }*/
 
-  /*//% blockId=newland_inference block="KNN inference"
+  /*//% blockId=ME66_inference block="KNN inference"
   //% group="Classifier" weight=89
   //% advanced=true
-  export function newland_inference() {
+  export function ME66_inference() {
     let str = `K46`
     serial.writeLine(`K46`)
     // asyncWrite(str, 46)
   }*/
 
-  /*//% blockId=newland_on_inference block="on Inference"
+  /*//% blockId=ME66_on_inference block="on Inference"
   //% group="Classifier" weight=88 draggableParameters=reporter blockGap=40
   //% advanced=true
-  export function newland_on_inference(handler: (index: number) => void) {
+  export function ME66_on_inference(handler: (index: number) => void) {
     kmodelEvt = handler
   }*/
 
