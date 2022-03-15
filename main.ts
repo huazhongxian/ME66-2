@@ -329,18 +329,19 @@ namespace newland {
   }
 
 
-    /**
-     * @param t string to display; eg: hello
-     */
-    //% blockId=newland_print block="Newland print %t X %x Y %y"
-    //% x.min=0 x.max=320
-    //% y.min=0 y.max=240
-    //% group="Basic" weight=97
-    export function newland_print(t: string, x: number, y: number): void {
+  /**
+   * @param t string to display; eg: hello
+   * @param d delay; eg: 1000
+   */
+  //% blockId=newland_print block="Newland print %t X %x Y %y||delay %d ms"
+  //% x.min=0 x.max=320
+  //% y.min=0 y.max=240
+  //% group="Basic" weight=97
+  export function newland_print(t: string, x: number, y: number, d: number = 1000): void {
 
-        let str = `K4 ${x} ${y} ${t}`
-        serial.writeLine(str)
-    }
+    let str = `K4 ${x} ${y} ${d} ${t}`
+    serial.writeLine(str)
+  }
 
   //% blockId=newland_onbtn block="on Button"
   //% weight=96
