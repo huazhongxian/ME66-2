@@ -17,7 +17,7 @@
     "newland.newland_display1|block": "播放音频 %name",
 
 
-    "newland.newland_print|block": "打印 %t X %x Y %y",
+    "newland.newland_print|block": "打印 %t X %x Y %y||延时 %d 毫秒",
     "newland.newland_lcd_direction|block": "LCD方向%dir",
     "newland.newland_screen_direction|block": "屏幕方向%dir",
     "newland.newland_camera_switch|block": "摄像头%dir",
